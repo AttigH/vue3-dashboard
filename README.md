@@ -3,6 +3,8 @@
 An out-of-box UI solution for enterprise applications as a Vue boilerplate. based on  <a href="https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn/" target="_blank">Ant Design of Vue</a>
 </div>
 
+How to run
+----
 
 ```bash
 Node version for development: v18.17.1, do not use a version lower than this, otherwise the project may not run
@@ -19,44 +21,6 @@ pnpm dev-ui with development ball
 pnpm run build-only
 ```
 
-
-
-
-#### Basic structure
-
-- Routing file Configure routing in router.ts according to the agreed syntax.
-- Backend routing: Set whether to enable or not through useAsyncRouter in defaultSettings.ts. The format of backend routing is in userNav of mockUtils.ts.
-- The component corresponding to the backend routing automatically imports the logic in batchImportFiles, and automatically imports the vue file under view as the page
-- For ordinary routing, refer to exampleRouterMap
-- Menu generation generates menus according to routing configuration. The menu item name, nested path and routing are highly coupled. For specific configuration content, please refer to [Ant Design Pro Vue](https://pro.antdv.com/docs/router-and-nav)
-- How to write the menu to jump to a third-party URL meta: { title: 'user.login.login', icon: 'account-book', target: 'http://www.baidu.com', blank: false } If you do not want to check in in a new window, please write blank: false. Otherwise, blank is not written or any value means true.
-
-
-
-
-
-
-- The project uses vite-plugin-theme to generate themes (css)
-- Currently, it can support automatic switching of themes, including production mode,
-- Through research, it is found that antv (element has official support) currently has two mainstream switching modes, and both require webpack/vite plug-ins:
-1. Pass in the color variables and values ​​that need to be changed in advance, such as: @primary-color: [#0094ff, #fff, #000, etc.], and then read these variables when webpack is compiled, and then statically generate these css files,
-- Advantages, 1. When switching themes, just load different css files to save performance,
-- Disadvantages: 1. Consume server space, 2. Only a few pre-defined themes can be customized 3. The variable name to be modified needs to be dynamically written, such as @primary-color, @success-colo, etc., and the replacement is not complete
-2. The second solution, based on the vite-plugin-theme plug-in,
-
-- Advantages
-
-1. You can choose the theme color arbitrarily in the production environment;
-
-2. There is no problem 3 of the previous bill, and the theme change is more comprehensive
-
-- Disadvantages:
-1. Since the theme color is dynamically generated, there will be performance loss
-2. The color number of the antv main color must be found first, otherwise the theme replacement function will fail, so when the antv main color is changed, the code needs to be changed accordingly. It is recommended to lock the antv version to avoid this problem;
-- The guessing principle, according to the plug-in description and the code running phenomenon, is to generate several adjacent colors with the main color and then find the corresponding CSS styles containing these colors in the entire project and then compare and replace them. For example, it was originally [a, b, c, d], and now it is [1, 2, 3, 4], then a becomes 1, b becomes 2, and then the corresponding replacement is written to the bottom of the body to complete the theme switching. There is no need to search according to the definition of @primary-color. This is a more complete color replacement.
-*** The dark mode currently uses the dark css of the antv official website, which is completed by dynamically adding links and cannot be adapted to all pages. Therefore, some compatible styles are written in darkModePatch.less***
-
-~~**3. This project uses the third solution: Use the official antv V3 version of the css variable to modify the theme, achieving the optimal solution for performance and volume**~~(antv 4.0 and later use css in js, no need to modify the less variable, directly set the color in the a-config-provider component, for details, see the official website tutorial)
 
 Permission management
 ----
@@ -75,18 +39,9 @@ Used to automatically generate a set of templates, including internationalizatio
 Other instructions
 ----
 
-- ​​In order to keep the ant vue pro style consistent, some codes are quoted from [ant vue pro](https://2x.antdv.com/components/overview-cn/), such as global.less, some plug-ins and principles are borrowed from [vben](https://vvbin.cn/next/), thanks to both of you
-
 - Currently <script setup lang="ts"></script> has a bug, which will cause the .ts file to be unable to be imported, and the error The requested module '/src/views/user/ty.ts' does not provide an export named 'FormState' is reported
 
-- There are some comments in the document, which are better when used with the vscode plug-in better-comments:
-Comments TODO: To be completed
-bug:todo: bug
-info:todo: Some situations found
-warn:todo: There may be bugs
-ques:todo: Questions
-Only uppercase 'TODO' indicates an unfinished function, and lowercase todo is just for the convenience of searching
-(If the plug-in does not change color in the vue file, you can refer to https://blog.csdn.net/weixin_47872719/article/details/126743867
+
 Specific steps:
 1. Open C:\Users\Admin\\.vscode\extensions\bttter-comments
 2. Open the configuration file aaron-bond.better-comments-3.0.2/out/parser.js
